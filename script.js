@@ -96,7 +96,7 @@ form.addEventListener("submit", (event) => {
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    event: "form_submit",
+    event: "form_submit_gtm",
     form_name: "testForm",
     plan: formData.get("plan"),
     country: formData.get("country"),
