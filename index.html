@@ -38,31 +38,92 @@
   </noscript>
 
   <div class="container">
-    <h1>Test Form</h1>
+    <h1>GA Demo App</h1>
 
-    <form id="testForm">
-      <label>
-        Name
-        <input type="text" name="name" required />
-      </label>
+    <nav class="tabs" aria-label="Main pages">
+      <a href="/home" data-route="/home" class="tab-link">Home</a>
+      <a href="/form" data-route="/form" class="tab-link">Form</a>
+      <a href="/qna" data-route="/qna" class="tab-link">QnA</a>
+    </nav>
 
-      <label>
-        Email
-        <input type="email" name="email" required />
-      </label>
+    <section class="page" data-page="home">
+      <h2>Home</h2>
+      <p>Welcome to the multi-page demo. Use the tabs above to move between Home, Form, and QnA routes.</p>
+    </section>
 
-      <label>
-        Plan
-        <select name="plan">
-          <option value="basic">Basic</option>
-          <option value="pro">Pro</option>
-        </select>
-      </label>
+    <section class="page" data-page="form">
+      <h2>Test Form</h2>
+      <form id="testForm">
+        <label>
+          Name
+          <input type="text" name="name" required />
+        </label>
 
-      <button type="submit">Submit</button>
-    </form>
+        <label>
+          Email
+          <input type="email" name="email" required />
+        </label>
 
-    <p id="status"></p>
+        <label>
+          Plan
+          <select name="plan">
+            <option value="basic">Basic</option>
+            <option value="pro">Pro</option>
+            <option value="enterprise">Enterprise</option>
+          </select>
+        </label>
+
+        <label>
+          Country
+          <select name="country">
+            <option value="us">United States</option>
+            <option value="ca">Canada</option>
+            <option value="uk">United Kingdom</option>
+            <option value="in">India</option>
+          </select>
+        </label>
+
+        <fieldset>
+          <legend>Billing Cycle</legend>
+          <label class="inline-option">
+            <input type="radio" name="billingCycle" value="monthly" checked />
+            Monthly
+          </label>
+          <label class="inline-option">
+            <input type="radio" name="billingCycle" value="yearly" />
+            Yearly
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Add-ons</legend>
+          <label class="inline-option">
+            <input type="checkbox" name="addons" value="analytics" />
+            Advanced Analytics
+          </label>
+          <label class="inline-option">
+            <input type="checkbox" name="addons" value="support" />
+            Priority Support
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" id="previewBtn">Preview Selection</button>
+          <button type="button" id="clearStatusBtn">Clear Status</button>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+      <p id="status"></p>
+    </section>
+
+    <section class="page" data-page="qna">
+      <h2>QnA</h2>
+      <p><strong>Q:</strong> What is this?</p>
+      <p><strong>A:</strong> A simple client-side routed page set with URLs like <code>/home</code> and <code>/qna</code>.</p>
+      <p><strong>Q:</strong> Can I add more pages?</p>
+      <p><strong>A:</strong> Yes. Add another tab link and matching section with <code>data-page</code>.</p>
+    </section>
   </div>
 
   <script src="script.js"></script>
