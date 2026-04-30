@@ -9,7 +9,7 @@ const basePath = "/david-ga-lab";
 const routeMap = {
   home: `${basePath}/`,
   form: `${basePath}/form`,
-  qna: `${basePath}/QnA`,
+  qna: `${basePath}/qna`,
 };
 
 function normalizeRoute(pathname) {
