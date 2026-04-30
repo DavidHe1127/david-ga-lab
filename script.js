@@ -4,29 +4,44 @@ const previewBtn = document.getElementById("previewBtn");
 const clearStatusBtn = document.getElementById("clearStatusBtn");
 const tabLinks = Array.from(document.querySelectorAll(".tab-link"));
 const pages = Array.from(document.querySelectorAll(".page"));
+const basePath = "/david-ga-lab";
+
+const routeMap = {
+  home: `${basePath}/`,
+  form: `${basePath}/form`,
+  qna: `${basePath}/QnA`,
+};
 
 function normalizeRoute(pathname) {
-  if (!pathname || pathname === "/") {
-    return "/home";
+  if (!pathname || pathname === "/" || pathname === basePath || pathname === `${basePath}/`) {
+    return "home";
   }
-  const knownRoutes = ["/home", "/form", "/qna"];
-  return knownRoutes.includes(pathname) ? pathname : "/home";
+
+  if (pathname === routeMap.form) {
+    return "form";
+  }
+
+  if (pathname.toLowerCase() === routeMap.qna.toLowerCase()) {
+    return "qna";
+  }
+
+  return "home";
 }
 
 function setActivePageByRoute(route) {
-  const activeRoute = normalizeRoute(route);
-  const pageName = activeRoute.slice(1);
+  const pageName = normalizeRoute(route);
+  const targetPath = routeMap[pageName];
 
   tabLinks.forEach((link) => {
-    link.classList.toggle("active", link.dataset.route === activeRoute);
+    link.classList.toggle("active", link.dataset.route === pageName);
   });
 
   pages.forEach((page) => {
     page.classList.toggle("active", page.dataset.page === pageName);
   });
 
-  if (window.location.pathname !== activeRoute) {
-    window.history.replaceState({}, "", activeRoute);
+  if (window.location.pathname !== targetPath) {
+    window.history.replaceState({}, "", targetPath);
   }
 }
 
@@ -54,9 +69,10 @@ function renderPreview() {
 tabLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
-    const route = normalizeRoute(link.dataset.route);
-    window.history.pushState({}, "", route);
-    setActivePageByRoute(route);
+    const pageName = link.dataset.route;
+    const targetPath = routeMap[pageName] || routeMap.home;
+    window.history.pushState({}, "", targetPath);
+    setActivePageByRoute(targetPath);
   });
 });
 
