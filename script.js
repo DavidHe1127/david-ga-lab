@@ -91,11 +91,17 @@ clearStatusBtn.addEventListener("click", () => {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   renderPreview();
-  if (typeof gtag === "function") {
-    gtag("event", "form_submit", {
-      form_name: "testForm",
-      plan: new FormData(form).get("plan") || "unknown",
-    });
-  }
+  const formData = new FormData(form);
+  const addonsCount = document.querySelectorAll("input[name='addons']:checked").length;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "form_submit",
+    form_name: "testForm",
+    plan: formData.get("plan"),
+    country: formData.get("country"),
+    billingCycle: formData.get("billingCycle"),
+    addons_count: addonsCount,
+  });
   status.textContent = `${status.textContent} | Form submitted successfully.`;
 });
