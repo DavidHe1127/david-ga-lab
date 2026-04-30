@@ -28,6 +28,15 @@
   </script>
 
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function() {
+      var redirect = sessionStorage.getItem("spaRedirect");
+      if (redirect) {
+        sessionStorage.removeItem("spaRedirect");
+        history.replaceState(null, "", redirect);
+      }
+    })();
+  </script>
 </head>
 <body>
 
